@@ -4,6 +4,7 @@ import Headers from "../components/header";
 import { ConvexClientProvider } from "./ConvexClientProvider";
 import { ClerkProvider } from "@clerk/nextjs";
 import { dark } from '@clerk/ui/themes'
+import { Toaster } from "sonner";
 
 export const metadata = {
   title: "AI Event",
@@ -40,6 +41,7 @@ export default function RootLayout({ children }) {
                 <footer className="border-t border-gray-800/50 py-8 px-6 max-w-3xl mx-auto">
                   <div className="text-sm text-gray-400">Made to showcase the power of AI</div>
                 </footer>
+                <Toaster richColors/>
               </main>
             </ConvexClientProvider>
           </ClerkProvider>
