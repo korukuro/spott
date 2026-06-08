@@ -49,11 +49,12 @@ export default defineSchema({
         address: v.optional(v.string()),
         city:v.string(),
         state:v.optional(v.string()),
+        country:v.string(),
 
         // Ticketing
         capacity: v.number(),
         ticketType: v.union(v.literal("free"), v.literal("paid")),
-        tickerPrice: v.optional(v.number()), // required if ticketType is paid
+        ticketPrice: v.optional(v.number()), // required if ticketType is paid
         registrationCount:v.number(),
 
         //Customization
@@ -66,7 +67,7 @@ export default defineSchema({
     }).index("by_organizer", ["organizerId"])
       .index("by_slug", ["slug"])
       .index("by_category", ["category"])
-      .index("by_startDate", ["startDate"])
+      .index("by_start_date", ["startDate"])
       .searchIndex("search_title", {searchField: "title"}),
 
     registrations: defineTable({
