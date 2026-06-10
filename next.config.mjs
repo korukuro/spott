@@ -6,10 +6,15 @@ const nextConfig = {
         protocol: "https",
         hostname: "img.clerk.com",
         port: "",
-        pathname: "/**", // Allows all image paths from Clerk
+        pathname: "/**",
       },
-      // 💡 If you use other image hosts (like Unsplash or AWS S3), 
-      // just copy the block above and change the hostname!
+      // 👇 ADD THE BLOCKED DOMAIN HERE 👇
+      {
+        protocol: "https",
+        hostname: "YOUR_BLOCKED_HOSTNAME_HERE", // e.g., "images.unsplash.com" or your Convex file domain
+        port: "",
+        pathname: "/**",
+      },
     ],
   },
 };
