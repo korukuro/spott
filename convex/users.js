@@ -36,7 +36,7 @@ export const store = mutation({
       email: identity.email ?? "",
       imageUrl: identity.pictureUrl,
       hasCompletedOnboarding: false,
-        freeEventCreated: 0,
+      freeEventCreated: 0,
       createdAt: Date.now(),
       updatedAt: Date.now(),
     });
