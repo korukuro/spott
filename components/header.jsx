@@ -72,6 +72,11 @@ const Header = () => {
                     labelIcon={<Ticket size={16} />}
                     href="/my-tickets"
                   />
+                    <UserButton.Link
+                      label="My Events"
+                      labelIcon={<Building size={16} />}
+                      href="/my-events"
+                    />
                   <UserButton.Link
                     label="My Profile"
                     labelIcon={<Building size={16} />}
