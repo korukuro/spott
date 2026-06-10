@@ -5,10 +5,10 @@ import { useRouter } from "next/navigation";
 import { Calendar, MapPin, Users, ArrowRight, Loader2 } from "lucide-react";
 import { format } from "date-fns";
 import Image from "next/image";
-import { api } from '../../../convex/_generated/api';
+import { api } from "../../../convex/_generated/api";
 import { createLocationSlug } from "../../../lib/location-utils";
-import React from 'react'
-import { useConvexQuery } from '../../../hooks/use-convex-query';
+import React from "react";
+import { useConvexQuery } from "../../../hooks/use-convex-query";
 import { Badge } from "../../../components/ui/badge";
 import { Button } from "../../../components/ui/button";
 import { Card, CardContent } from "../../../components/ui/card";
@@ -24,44 +24,55 @@ import Autoplay from "embla-carousel-autoplay";
 import EventCard from "../../../components/event-card";
 
 const ExplorePage = () => {
-    const router = useRouter();
-    const plugin = useRef(Autoplay({ delay: 5000, stopOnInteraction: true }));
+  const router = useRouter();
+  const plugin = useRef(Autoplay({ delay: 5000, stopOnInteraction: true }));
 
-    const {data: currentUser} = useConvexQuery(api.users.getCurrentUser);
-    const {data: featuredEvents, isLoading: loadingFeatured} = useConvexQuery(api.explore.getFeaturedEvents, {limit : 3});
-    const {data : localEvents, isLoading: loadingLocal} = useConvexQuery(api.explore.getEventsByLocation,{
-        city: currentUser?.location?.city || "Gurgaon",
-        state: currentUser?.location?.state || "Haryana",
-        limit : 4,
-    });
-    const {data: popularEvents, isLoading: loadingPopular} = useConvexQuery(api.explore.getPopularEvents,{limit : 6});
+  const { data: currentUser } = useConvexQuery(api.users.getCurrentUser);
+  const { data: featuredEvents, isLoading: loadingFeatured } = useConvexQuery(
+    api.explore.getFeaturedEvents,
+    { limit: 3 },
+  );
+  const { data: localEvents, isLoading: loadingLocal } = useConvexQuery(
+    api.explore.getEventsByLocation,
+    {
+      city: currentUser?.location?.city || "Gurgaon",
+      state: currentUser?.location?.state || "Haryana",
+      limit: 4,
+    },
+  );
+  const { data: popularEvents, isLoading: loadingPopular } = useConvexQuery(
+    api.explore.getPopularEvents,
+    { limit: 6 },
+  );
 
-    const {data : categoryCounts} = useConvexQuery(api.explore.getCategoryCounts);
+  const { data: categoryCounts } = useConvexQuery(
+    api.explore.getCategoryCounts,
+  );
 
-    // Format categories with counts
-    const categoriesWithCounts = CATEGORIES.map((cat) => ({
-        ...cat,
-        count: categoryCounts?.[cat.id] || 0,
-    }));
+  // Format categories with counts
+  const categoriesWithCounts = CATEGORIES.map((cat) => ({
+    ...cat,
+    count: categoryCounts?.[cat.id] || 0,
+  }));
 
-    const handleEventClick = (slug) => {
-        router.push(`/events/${slug}`);
-    };
+  const handleEventClick = (slug) => {
+    router.push(`/events/${slug}`);
+  };
 
-    const handleCategoryClick = (categoryId) => {
-        router.push(`/explore/${categoryId}`);
-    };
+  const handleCategoryClick = (categoryId) => {
+    router.push(`/explore/${categoryId}`);
+  };
 
-    const handleViewLocalEvents = () => {
-        const city = currentUser?.location?.city || "Gurugram";
-        const state = currentUser?.location?.state || "Haryana";
-        const slug = createLocationSlug(city, state);
-        router.push(`/explore/${slug}`);
-    };
+  const handleViewLocalEvents = () => {
+    const city = currentUser?.location?.city || "Gurugram";
+    const state = currentUser?.location?.state || "Haryana";
+    const slug = createLocationSlug(city, state);
+    router.push(`/explore/${slug}`);
+  };
 
-    const isLoading = loadingFeatured || loadingLocal || loadingPopular;
+  const isLoading = loadingFeatured || loadingLocal || loadingPopular;
 
-    if (isLoading) {
+  if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <Loader2 className="w-8 h-8 animate-spin text-purple-500" />
@@ -70,7 +81,7 @@ const ExplorePage = () => {
   }
   return (
     <>
-        {/* Hero Title */}
+      {/* Hero Title */}
       <div className="pb-12 text-center">
         <h1 className="text-5xl md:text-6xl font-bold mb-4">Discover Events</h1>
         <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
@@ -79,7 +90,7 @@ const ExplorePage = () => {
         </p>
       </div>
 
-       {/* Featured Carousel */}
+      {/* Featured Carousel */}
       {featuredEvents && featuredEvents.length > 0 && (
         <div className="mb-16">
           <Carousel
@@ -227,7 +238,7 @@ const ExplorePage = () => {
           </div>
         </div>
       )}
-        {/* Empty State */}
+      {/* Empty State */}
       {!loadingFeatured &&
         !loadingLocal &&
         !loadingPopular &&
@@ -248,7 +259,7 @@ const ExplorePage = () => {
           </Card>
         )}
     </>
-  )
-}
+  );
+};
 
 export default ExplorePage;

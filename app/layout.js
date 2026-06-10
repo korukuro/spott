@@ -17,7 +17,7 @@ export default function RootLayout({ children }) {
       lang="en" suppressHydrationWarning={true}>
 
 
-      <body className={`bg-linear-to-br from-gray-950 via-zinc-900 to-stone-900 text-white`}>
+      <body className={`bg-linear-to-br from-gray-950 via-zinc-900 to-stone-900 text-white`} suppressHydrationWarning={true}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
