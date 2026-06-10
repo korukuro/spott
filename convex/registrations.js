@@ -84,7 +84,9 @@ export const checkRegistration = query({
 export const getMyRegistrations = query({
   handler: async (ctx) => {
     const user = await ctx.runQuery(internal.users.getCurrentUser);
-
+    if (!user) {
+      return []; 
+    }
     const registrations = await ctx.db
       .query("registrations")
       .withIndex("by_user", (q) => q.eq("userId", user._id))
