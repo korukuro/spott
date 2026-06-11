@@ -9,7 +9,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center relative z-10">
           {/* left */}
           <div className="text-center sm:text-left">
-            <div className="mb-6">
+            <div>
               <span className="text-gray-500 font-light tracking-wide">
                 spott<span className="text-purple-400">*</span>
               </span>

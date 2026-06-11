@@ -99,7 +99,7 @@ const SearchLocationBar = () => {
             onFocus={() => {
               if (searchQuery.length >= 2) setShowSearchResults(true);
             }}
-            className="pl-10 w-full h-9 rounded-none rounded-l-md"
+            className="pl-10 w-full h-8 rounded-none rounded-l-md"
           />
         </div>
 

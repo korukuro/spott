@@ -5,9 +5,10 @@ import Link from "next/link";
 import Image from "next/image";
 import { SignInButton, UserButton, Show, useAuth } from "@clerk/nextjs";
 import { Button } from "./ui/button";
+import { Badge } from "./ui/badge";
 import { BarLoader } from "react-spinners";
 import { useStoreUser } from "../hooks/useStoreUserEffect";
-import { Badge, Building, Crown, Plus, Ticket, User } from "lucide-react";
+import { Building, Crown, Plus, Ticket } from "lucide-react";
 import OnboardingModal from "./onboarding-modal";
 import { useOnboarding } from "../hooks/use-onboarding";
 import SearchLocationBar from "./search-location-bar";
@@ -19,8 +20,8 @@ const Header = () => {
   const { showOnboarding, handleOnboardingComplete, handleOnboardingSkip } =
     useOnboarding();
 
-    const {has} = useAuth();
-    const hasPro = has?.({plan: "pro"});
+  const { has } = useAuth();
+  const hasPro = has?.({ plan: "pro" });
   return (
     <>
       <nav className="fixed top-0 left-0 right-0 bg-background/80 backdrop-blur-xl z-20 border-b">
@@ -32,29 +33,33 @@ const Header = () => {
               alt="Spott Logo"
               width={500}
               height={500}
-              className="w-full h-11"
+              className="w-auto h-11 object-contain"
               priority
             />
 
             {/* Pro plan */}
             {hasPro && (
-                <Badge className="bg-linear-to-r from-pink-500 to-orange-500 gap-1 text-white ml-3">
-                    <Crown className="w-3 h-3"/>
-                        Pro
-                </Badge>
+              <Badge className="bg-linear-to-r from-pink-500 to-orange-500 flex items-center gap-1 text-white ml-3 whitespace-nowrap shrink-0">
+                <Crown className="w-3 h-3" />
+                <span>Pro</span>
+              </Badge>
             )}
           </Link>
-            {/* Search & Location - Desktop Only */}
-            <div className="hidden md:flex flex-1 justify-center"><SearchLocationBar/></div>
+          {/* Search & Location - Desktop Only */}
+          <div className="hidden md:flex flex-1 justify-center">
+            <SearchLocationBar />
+          </div>
 
           <div className="flex items-center">
-            {!hasPro && (<Button
+            {!hasPro && (
+              <Button
                 variant="ghost"
                 size="sm"
                 onClick={() => setShowUpgradeModal(true)}
-            >
+              >
                 Pricing
-            </Button>)}
+              </Button>
+            )}
             <Button variant="ghost" size="sm" asChild className={"mr-2"}>
               <Link href="/explore">Explore</Link>
             </Button>
@@ -72,11 +77,11 @@ const Header = () => {
                     labelIcon={<Ticket size={16} />}
                     href="/my-tickets"
                   />
-                    <UserButton.Link
-                      label="My Events"
-                      labelIcon={<Building size={16} />}
-                      href="/my-events"
-                    />
+                  <UserButton.Link
+                    label="My Events"
+                    labelIcon={<Building size={16} />}
+                    href="/my-events"
+                  />
                   <UserButton.Link
                     label="My Profile"
                     labelIcon={<Building size={16} />}
@@ -96,7 +101,7 @@ const Header = () => {
 
         {/* Mobile search & Location - below header */}
         <div className="md:hidden border-t px-3 py-3">
-            <SearchLocationBar/>
+          <SearchLocationBar />
         </div>
 
         {isLoading && (
